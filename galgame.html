@@ -1,0 +1,1300 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旮旯给木社团资源站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b9d;
+            --primary-dark: #e85a8a;
+            --secondary: #9b59b6;
+            --accent: #00d4aa;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-input: #0f1629;
+            --text: #eee;
+            --text-muted: #888;
+            --border: #2a2a4a;
+            --shadow: rgba(255, 107, 157, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(155, 89, 182, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 212, 170, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 登录页面 */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-dark));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px var(--shadow);
+            animation: floatIn 0.8s ease-out;
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-box h1 {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            font-size: 0.95rem;
+        }
+
+        .login-box .emoji-deco {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .login-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+        }
+
+        .login-tab {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg-input);
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--shadow);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .admin-login-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding: 10px;
+            background: var(--bg-input);
+            border-radius: 10px;
+        }
+
+        /* 主页面 */
+        .main-container {
+            display: none;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+        }
+
+        .user-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .user-badge.admin {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .user-badge.visitor {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .logout-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* 管理员工具栏 */
+        .admin-toolbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 40px;
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .admin-toolbar.show {
+            display: flex;
+        }
+
+        .toolbar-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toolbar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .toolbar-btn.primary {
+            background: linear-gradient(135deg, var(--accent), #00b894);
+            color: var(--bg-dark);
+        }
+
+        .toolbar-btn.secondary {
+            background: linear-gradient(135deg, var(--secondary), #8e44ad);
+            color: white;
+        }
+
+        /* 分类导航 */
+        .category-nav {
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-tag {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .category-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .category-tag.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
+
+        /* 搜索栏 */
+        .search-bar {
+            padding: 25px 40px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-input-wrapper::before {
+            content: '🔍';
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        /* 游戏网格 */
+        .games-section {
+            padding: 20px 40px 60px;
+        }
+
+        .section-title {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-dark));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: cardIn 0.6s ease-out backwards;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--shadow);
+            border-color: var(--primary);
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-cover {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .game-cover-placeholder {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--secondary);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .game-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .game-size {
+            background: var(--bg-input);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .download-btn {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .edit-btn {
+            background: var(--bg-input);
+            color: var(--accent);
+        }
+
+        .delete-btn {
+            background: var(--bg-input);
+            color: #ff6b6b;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease-out;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-form textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .modal-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent), #00b894);
+            border: none;
+            border-radius: 12px;
+            color: var(--bg-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.4);
+        }
+
+        /* 分类列表管理 */
+        .category-list {
+            margin-bottom: 20px;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: var(--bg-input);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .category-item-name {
+            font-size: 1rem;
+        }
+
+        .category-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .category-item-actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .category-edit-btn {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .category-delete-btn {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .add-category-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-category-form input {
+            flex: 1;
+        }
+
+        .add-category-form button {
+            padding: 15px 25px;
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            color: var(--bg-dark);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state .emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .logo { font-size: 1.4rem; }
+            .games-section, .search-bar, .category-nav { padding-left: 20px; padding-right: 20px; }
+            .admin-toolbar { padding: 15px 20px; }
+            .login-box { padding: 40px 25px; }
+            .login-box h1 { font-size: 1.8rem; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* 管理员欢迎条 */
+        .welcome-bar {
+            display: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 1rem;
+        }
+
+        .welcome-bar.show {
+            display: block;
+        }
+
+        .welcome-bar strong {
+            color: #fff;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录页面 -->
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <div class="emoji-deco">🎮</div>
+            <h1>旮旯给木社团</h1>
+            <p class="subtitle">资源站 · 请选择身份登录</p>
+            
+            <!-- 统一入口 -->
+            <div id="mainEntry">
+                <div class="form-group">
+                    <label>请输入密码</label>
+                    <input type="password" id="entryPassword" placeholder="请输入密码" onkeypress="if(event.keyCode===13)checkEntry()">
+                </div>
+                <button class="login-btn" onclick="checkEntry()">进入</button>
+                <p class="error-msg" id="entryError">密码错误，请重试</p>
+            </div>
+
+            <!-- 管理员登录界面（隐藏） -->
+            <div id="adminLogin" style="display: none;">
+                <div class="admin-login-title">🔑 管理员登录</div>
+                <div class="form-group">
+                    <label>管理员账号</label>
+                    <input type="text" id="adminUsername" placeholder="请输入账号">
+                </div>
+                <div class="form-group">
+                    <label>管理员密码</label>
+                    <input type="password" id="adminPassword" placeholder="请输入密码" onkeypress="if(event.keyCode===13)adminLoginAction()">
+                </div>
+                <button class="login-btn" onclick="adminLoginAction()">管理员登录</button>
+                <p class="error-msg" id="adminError">账号或密码错误</p>
+                <p class="back-link" onclick="backToMain()">← 返回</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主页面 -->
+    <div class="main-container" id="mainPage">
+        <!-- 管理员欢迎条 -->
+        <div class="welcome-bar" id="welcomeBar">
+            <span>👋 欢迎您，管理员 <strong id="adminNameDisplay"></strong>！</span>
+        </div>
+
+        <header>
+            <div class="logo">🎮 旮旯给木社团资源站</div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span id="userName"></span>
+                    <span class="user-badge" id="userBadge"></span>
+                </div>
+                <button class="logout-btn" onclick="logout()">退出登录</button>
+            </div>
+        </header>
+
+        <div class="admin-toolbar" id="adminToolbar">
+            <button class="toolbar-btn primary" onclick="openGameModal()">➕ 添加游戏</button>
+            <button class="toolbar-btn secondary" onclick="openCategoryModal()">📁 管理分类</button>
+        </div>
+
+        <div class="category-nav" id="categoryNav">
+            <div class="category-tag active" onclick="filterByCategory(null)">全部</div>
+        </div>
+
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" placeholder="搜索游戏..." oninput="filterGames()">
+            </div>
+        </div>
+
+        <div class="games-section">
+            <h2 class="section-title">📦 <span id="currentCategoryTitle">全部资源</span></h2>
+            <div class="games-grid" id="gamesGrid"></div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="emoji">🎯</div>
+                <p>这个分类还没有游戏，管理员快去添加吧！</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 旮旯给木社团 · 仅供学习交流使用</p>
+        </footer>
+    </div>
+
+    <!-- 游戏模态框 -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gameModalTitle">添加游戏</h2>
+                <button class="close-modal" onclick="closeModal('gameModal')">&times;</button>
+            </div>
+            <form class="modal-form" onsubmit="saveGame(event)">
+                <div class="form-group">
+                    <label>游戏名称</label>
+                    <input type="text" id="gameName" placeholder="输入游戏名称" required>
+                </div>
+                <div class="form-group">
+                    <label>所属分类（社团/作者）</label>
+                    <select id="gameCategory" required>
+                        <option value="">请选择分类</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>游戏简介</label>
+                    <textarea id="gameDesc" placeholder="输入游戏简介"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>封面图片链接（可选）</label>
+                    <input type="text" id="gameCover" placeholder="https://example.com/cover.jpg">
+                </div>
+                <div class="form-group">
+                    <label>文件大小</label>
+                    <input type="text" id="gameSize" placeholder="例如: 2.5GB" required>
+                </div>
+                <div class="form-group">
+                    <label>下载链接</label>
+                    <input type="text" id="gameLink" placeholder="输入下载地址" required>
+                </div>
+                <input type="hidden" id="editingGameId">
+                <button type="submit" class="submit-btn">保存游戏</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 分类管理模态框 -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📁 管理分类</h2>
+                <button class="close-modal" onclick="closeModal('categoryModal')">&times;</button>
+            </div>
+            <div class="category-list" id="categoryList"></div>
+            <div class="add-category-form">
+                <input type="text" id="newCategoryName" placeholder="输入新分类名称（社团/作者名）">
+                <button onclick="addCategory()">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //                      配置区域
+        //  在这里设置管理员账号和访客密码
+        // ============================================================
+        const CONFIG = {
+            // 管理员入口代码（输入这个进入管理员登录界面）
+            adminCode: 'gal666',
+
+            // 管理员账号列表（可以添加多个）
+            admins: [
+                { username: 'admin', password: 'admin123' },
+                { username: 'master', password: 'master666' }
+                // 继续添加更多管理员...
+            ],
+
+            // 访客密码（输入这个直接进入访客界面）
+            visitorPassword: 'player666'
+        };
+        // ============================================================
+
+        let currentUser = null;
+        let currentCategory = null;
+        let games = [];
+        let categories = [];
+
+        // 统一入口检测
+        function checkEntry() {
+            const input = document.getElementById('entryPassword').value;
+            const errorMsg = document.getElementById('entryError');
+            
+            if (input === CONFIG.visitorPassword) {
+                // 访客密码，直接进入
+                currentUser = { role: 'visitor', name: '访客' };
+                showMainPage();
+            } else if (input === CONFIG.adminCode) {
+                // 管理员代码，进入管理员登录页面
+                document.getElementById('mainEntry').style.display = 'none';
+                document.getElementById('adminLogin').style.display = 'block';
+                document.getElementById('adminUsername').focus();
+                errorMsg.style.display = 'none';
+            } else {
+                // 都不对，显示错误
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // 返回主入口
+        function backToMain() {
+            document.getElementById('mainEntry').style.display = 'block';
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('entryPassword').value = '';
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('entryError').style.display = 'none';
+            document.getElementById('adminError').style.display = 'none';
+        }
+
+        // 管理员登录
+        function adminLoginAction() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            const admin = CONFIG.admins.find(a => a.username === username && a.password === password);
+            
+            if (admin) {
+                currentUser = { role: 'admin', name: admin.username };
+                showMainPage();
+            } else {
+                document.getElementById('adminError').style.display = 'block';
+            }
+        }
+
+        // 加载数据
+        function loadData() {
+            const savedGames = localStorage.getItem('gal_games_v2');
+            const savedCategories = localStorage.getItem('gal_categories');
+
+            if (savedCategories) {
+                categories = JSON.parse(savedCategories);
+            } else {
+                categories = [
+                    { id: 1, name: 'SMEE' },
+                    { id: 2, name: 'Yuzusoft' },
+                    { id: 3, name: 'Key' },
+                    { id: 4, name: '其他' }
+                ];
+                saveCategories();
+            }
+
+            if (savedGames) {
+                games = JSON.parse(savedGames);
+            } else {
+                games = [
+                    {
+                        id: 1,
+                        name: '示例游戏1',
+                        categoryId: 1,
+                        desc: '这是一个示例游戏，管理员可以编辑或删除它。',
+                        cover: '',
+                        size: '2.5GB',
+                        link: '#',
+                        date: '2025-01-01'
+                    },
+                    {
+                        id: 2,
+                        name: '示例游戏2',
+                        categoryId: 2,
+                        desc: '这是另一个示例游戏，点击下载按钮可以下载。',
+                        cover: '',
+                        size: '1.8GB',
+                        link: '#',
+                        date: '2025-01-02'
+                    }
+                ];
+                saveGames();
+            }
+        }
+
+        function saveGames() {
+            localStorage.setItem('gal_games_v2', JSON.stringify(games));
+        }
+
+        function saveCategories() {
+            localStorage.setItem('gal_categories', JSON.stringify(categories));
+        }
+
+        // 登录
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (currentLoginType === 'admin') {
+                const username = document.getElementById('adminUsername').value;
+                const admin = CONFIG.admins.find(a => a.username === username && a.password === password);
+                
+                if (admin) {
+                    currentUser = { role: 'admin', name: admin.username };
+                    showMainPage();
+                } else {
+                    errorMsg.style.display = 'block';
+                }
+            } else {
+                if (password === CONFIG.visitorPassword) {
+                    currentUser = { role: 'visitor', name: '访客' };
+                    showMainPage();
+                } else {
+                    errorMsg.style.display = 'block';
+                }
+            }
+        }
+
+        function showMainPage() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+
+            document.getElementById('userName').textContent = currentUser.name;
+            const badge = document.getElementById('userBadge');
+            badge.textContent = currentUser.role === 'admin' ? '管理员' : '访客';
+            badge.className = 'user-badge ' + (currentUser.role === 'admin' ? 'admin' : 'visitor');
+
+            // 显示管理员欢迎条
+            if (currentUser.role === 'admin') {
+                document.getElementById('adminToolbar').classList.add('show');
+                document.getElementById('welcomeBar').classList.add('show');
+                document.getElementById('adminNameDisplay').textContent = currentUser.name;
+            } else {
+                document.getElementById('welcomeBar').classList.remove('show');
+            }
+
+            renderCategories();
+            renderGames();
+        }
+
+        function logout() {
+            currentUser = null;
+            currentCategory = null;
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('adminToolbar').classList.remove('show');
+            document.getElementById('welcomeBar').classList.remove('show');
+            // 重置登录界面
+            document.getElementById('mainEntry').style.display = 'block';
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('entryPassword').value = '';
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('entryError').style.display = 'none';
+            document.getElementById('adminError').style.display = 'none';
+        }
+
+        // 渲染分类导航
+        function renderCategories() {
+            const nav = document.getElementById('categoryNav');
+            nav.innerHTML = `<div class="category-tag ${currentCategory === null ? 'active' : ''}" onclick="filterByCategory(null)">全部</div>`;
+            
+            categories.forEach(cat => {
+                nav.innerHTML += `<div class="category-tag ${currentCategory === cat.id ? 'active' : ''}" onclick="filterByCategory(${cat.id})">${cat.name}</div>`;
+            });
+
+            // 更新游戏表单的分类选择
+            const select = document.getElementById('gameCategory');
+            select.innerHTML = '<option value="">请选择分类</option>';
+            categories.forEach(cat => {
+                select.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
+            });
+        }
+
+        // 按分类筛选
+        function filterByCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            
+            const title = categoryId === null ? '全部资源' : categories.find(c => c.id === categoryId)?.name + ' 作品';
+            document.getElementById('currentCategoryTitle').textContent = title;
+            
+            renderGames();
+        }
+
+        // 渲染游戏列表
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+            let filteredGames = games;
+
+            if (currentCategory !== null) {
+                filteredGames = filteredGames.filter(g => g.categoryId === currentCategory);
+            }
+
+            if (searchText) {
+                filteredGames = filteredGames.filter(g =>
+                    g.name.toLowerCase().includes(searchText) ||
+                    g.desc.toLowerCase().includes(searchText)
+                );
+            }
+
+            if (filteredGames.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.innerHTML = filteredGames.map((game, index) => {
+                const category = categories.find(c => c.id === game.categoryId);
+                return `
+                    <div class="game-card" style="animation-delay: ${index * 0.1}s">
+                        ${game.cover
+                            ? `<img class="game-cover" src="${game.cover}" alt="${game.name}" onerror="this.outerHTML='<div class=\\'game-cover-placeholder\\'>🎮</div>'">`
+                            : '<div class="game-cover-placeholder">🎮</div>'
+                        }
+                        <div class="game-info">
+                            ${category ? `<span class="game-category-badge">${category.name}</span>` : ''}
+                            <h3 class="game-title">${game.name}</h3>
+                            <p class="game-desc">${game.desc || '暂无简介'}</p>
+                            <div class="game-meta">
+                                <span class="game-size">📁 ${game.size}</span>
+                                <span>${game.date}</span>
+                            </div>
+                            <div class="game-actions">
+                                <a href="${game.link}" class="download-btn" target="_blank">⬇️ 下载</a>
+                                ${currentUser && currentUser.role === 'admin' ? `
+                                    <button class="edit-btn" onclick="editGame(${game.id})">✏️</button>
+                                    <button class="delete-btn" onclick="deleteGame(${game.id})">🗑️</button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterGames() {
+            renderGames();
+        }
+
+        // 游戏模态框
+        function openGameModal() {
+            document.getElementById('gameModalTitle').textContent = '添加游戏';
+            document.getElementById('gameName').value = '';
+            document.getElementById('gameCategory').value = '';
+            document.getElementById('gameDesc').value = '';
+            document.getElementById('gameCover').value = '';
+            document.getElementById('gameSize').value = '';
+            document.getElementById('gameLink').value = '';
+            document.getElementById('editingGameId').value = '';
+            document.getElementById('gameModal').classList.add('show');
+        }
+
+        function editGame(id) {
+            const game = games.find(g => g.id === id);
+            if (!game) return;
+
+            document.getElementById('gameModalTitle').textContent = '编辑游戏';
+            document.getElementById('gameName').value = game.name;
+            document.getElementById('gameCategory').value = game.categoryId;
+            document.getElementById('gameDesc').value = game.desc;
+            document.getElementById('gameCover').value = game.cover;
+            document.getElementById('gameSize').value = game.size;
+            document.getElementById('gameLink').value = game.link;
+            document.getElementById('editingGameId').value = id;
+            document.getElementById('gameModal').classList.add('show');
+        }
+
+        function deleteGame(id) {
+            if (confirm('确定要删除这个游戏吗？')) {
+                games = games.filter(g => g.id !== id);
+                saveGames();
+                renderGames();
+            }
+        }
+
+        function saveGame(e) {
+            e.preventDefault();
+
+            const id = document.getElementById('editingGameId').value;
+            const gameData = {
+                name: document.getElementById('gameName').value,
+                categoryId: parseInt(document.getElementById('gameCategory').value),
+                desc: document.getElementById('gameDesc').value,
+                cover: document.getElementById('gameCover').value,
+                size: document.getElementById('gameSize').value,
+                link: document.getElementById('gameLink').value,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            if (id) {
+                const index = games.findIndex(g => g.id === parseInt(id));
+                if (index !== -1) {
+                    games[index] = { ...games[index], ...gameData };
+                }
+            } else {
+                gameData.id = Date.now();
+                games.unshift(gameData);
+            }
+
+            saveGames();
+            closeModal('gameModal');
+            renderGames();
+        }
+
+        // 分类管理
+        function openCategoryModal() {
+            renderCategoryList();
+            document.getElementById('categoryModal').classList.add('show');
+        }
+
+        function renderCategoryList() {
+            const list = document.getElementById('categoryList');
+            list.innerHTML = categories.map(cat => `
+                <div class="category-item">
+                    <span class="category-item-name">${cat.name}</span>
+                    <div class="category-item-actions">
+                        <button class="category-edit-btn" onclick="editCategory(${cat.id})">编辑</button>
+                        <button class="category-delete-btn" onclick="deleteCategory(${cat.id})">删除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addCategory() {
+            const input = document.getElementById('newCategoryName');
+            const name = input.value.trim();
+            if (!name) return;
+
+            categories.push({ id: Date.now(), name: name });
+            saveCategories();
+            renderCategoryList();
+            renderCategories();
+            input.value = '';
+        }
+
+        function editCategory(id) {
+            const category = categories.find(c => c.id === id);
+            if (!category) return;
+
+            const newName = prompt('修改分类名称:', category.name);
+            if (newName && newName.trim()) {
+                category.name = newName.trim();
+                saveCategories();
+                renderCategoryList();
+                renderCategories();
+                renderGames();
+            }
+        }
+
+        function deleteCategory(id) {
+            const gamesInCategory = games.filter(g => g.categoryId === id).length;
+            if (gamesInCategory > 0) {
+                alert(`该分类下还有 ${gamesInCategory} 个游戏，请先移动或删除这些游戏`);
+                return;
+            }
+
+            if (confirm('确定要删除这个分类吗？')) {
+                categories = categories.filter(c => c.id !== id);
+                saveCategories();
+                renderCategoryList();
+                renderCategories();
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // 点击模态框外部关闭
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) closeModal(this.id);
+            });
+        });
+
+        // 初始化
+        loadData();
+    </script>
+</body>
+</html>
+
